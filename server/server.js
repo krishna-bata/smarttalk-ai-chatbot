@@ -16,7 +16,8 @@ await connectDB();
 // Stripe Webhook
 app.post(
   "/api/stripe",
-  express.raw({ type: "application/json" }, stripeWebhooks),
+  express.raw({ type: "application/json" }),
+  stripeWebhooks,
 );
 
 // Middlewares
