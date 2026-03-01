@@ -51,13 +51,17 @@ const Sidebar = ({ isMenuOpen, setIsMenuOpen }) => {
 
   return (
     <div
-      className={`flex flex-col h-screen min-w-72 p-5 dark:bg-gradient-to-b from-[#242124]/30 to-[#000000]/30 border-r border-[#80609F]/30 backdrop-blur-3xl translate-all duration-500 max-md:absolute left-0 z-1 ${!isMenuOpen && "max-md:-translate-x-full"}`}
+      className={`cursor-pointer flex flex-col h-screen min-w-72 p-5 dark:bg-gradient-to-b from-[#242124]/30 to-[#000000]/30 border-r border-[#80609F]/30 backdrop-blur-3xl translate-all duration-500 max-md:absolute left-0 z-1 ${!isMenuOpen && "max-md:-translate-x-full"}`}
     >
       {/* Logo */}
       <img
         src={theme === "dark" ? assets.logo_full : assets.logo_full_dark}
         alt=""
         className="w-full max-w-48"
+        onClick={() => {
+          setSelectedChat(chats[0]);
+          setIsMenuOpen(false);
+        }}
       />
       {/* New Chat Button  */}
       <button
@@ -113,7 +117,7 @@ const Sidebar = ({ isMenuOpen, setIsMenuOpen }) => {
               <img
                 src={assets.bin_icon}
                 alt=""
-                className="hidden group-hover:block w-4 cursor-pointer not-dark:invert"
+                className="group-hover:block w-4 cursor-pointer not-dark:invert"
                 onClick={(e) =>
                   toast.promise(deleteChat(e, chat._id), {
                     loading: "deleting...",
@@ -186,7 +190,7 @@ const Sidebar = ({ isMenuOpen, setIsMenuOpen }) => {
         {user && (
           <img
             src={assets.logout_icon}
-            className="h-5 cursor-pointer hidden not-dark:invert group-hover:block"
+            className="h-5 cursor-pointer not-dark:invert group-hover:block"
             onClick={logout}
           />
         )}
